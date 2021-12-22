@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Attend
 from .forms import UsersForm,AttendForm
 import datetime as dt
+from django.db.models import Q
 
 
 #名前を選択式
@@ -45,5 +46,23 @@ def create(request):
 
 def list(request):
     List=Attend.objects.all()
+
+    keyword1 = request.GET.get('keyword1')
+    keyword2 = request.GET.get('keyword2')
+    hiduke= request.GET.get('hiduke')
+
+    if hiduke=='一週間前':
+        one_week_ago = dt.datetime.now() + dt.timedelta(days=7)
+        List = List.filter(date__range=[one_week_ago, dt.datetime.now()])
+
+    if hiduke=='当日':
+        today = dt.datetime.now()
+        List = List.filter(date__icontains=today)
+
+    #if keyword2 and keyword2:
+    #   List = List.filter(
+    #            name__icontains=keyword1,in_out__icontains=keyword2
+    #   )
+    
     params={'List':List}
     return render(request,'list.html', params)

@@ -6,6 +6,20 @@
 <body>
     {% block content %}
     <h1>出退勤リスト</h1>
+    <form method="GET" action="{% url 'list' %}">
+        <label>名前</label>
+        <input type="text" name="keyword1">
+        <label>出勤/退勤</label>
+        <input type="text" name="keyword2">
+        
+        <input type="checkbox"  name='hiduke' value="当日">
+        <label >当日</label>
+        <input type="checkbox"  name='hiduke' value="一週間前">
+        <label >一週間前</label>
+
+        <button type="submit">検索</button>
+
+      </form>
     <table>
         <thead>
             <tr>
