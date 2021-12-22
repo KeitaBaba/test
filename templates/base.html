@@ -10,6 +10,14 @@
   </head>
   <body>
     <header>
+      <div class="navbar-menu" id="my-menu">
+        <div class="navbar-end">
+            <div class="buttons">
+              <a class="button is-info navbar-item" href="{% url 'new' %}"><strong>打刻</strong></a>
+                <a class="button is-info navbar-item" href="{% url 'list' %}"><strong>一覧</strong></a>
+            </div>
+        </div>
+    </div>
     </header>
     <main>
         {% block content %}

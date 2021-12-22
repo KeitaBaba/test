@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}List{% endblock %}
+
+<html> 
+<body>
+    {% block content %}
+    <h1>出退勤リスト</h1>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">名前</th>
+                <th scope="col">出勤/退勤</th>
+                <th scope="col">日付</th>
+                <th scope="col">時刻</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for list in List %}
+              <td>{{ list.name }}</td>
+              <td>{{ list.in_out }}</td>
+              <td>{{ list.date|date:"m-d"}}</td>  
+              <td>{{ list.time|date:"H:i" }}</td>                       
+            </tr>
+           {% endfor %}
+      
+        </tbody>
+    </table>   
+
+
+    {% endblock %}
+
+</body>
+
+</html>

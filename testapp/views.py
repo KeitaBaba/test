@@ -1,7 +1,15 @@
 from django.shortcuts import render
+from .models import Attend
 from .forms import UsersForm,AttendForm
 import datetime as dt
- 
+
+
+#名前を選択式
+#チェックボックス一つのみ選択
+#日付や名前でフィルター
+#ファイルで出力(csvかExcel)
+#出勤時刻と退勤時刻を横並びで
+  
 
 def new(request):
     params = {'form': None}
@@ -33,3 +41,9 @@ def create(request):
         params['form'] = UsersForm()
 
     return render(request, 'create.html', params)
+
+
+def list(request):
+    List=Attend.objects.all()
+    params={'List':List}
+    return render(request,'list.html', params)
