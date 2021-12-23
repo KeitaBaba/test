@@ -10,7 +10,7 @@ from django.db.models import Q
 #日付や名前でフィルター
 #ファイルで出力(csvかExcel)
 #出勤時刻と退勤時刻を横並びで
-  
+#編集機能
 
 def new(request):
     params = {'form': None}
@@ -47,22 +47,33 @@ def create(request):
 def list(request):
     List=Attend.objects.all()
 
-    keyword1 = request.GET.get('keyword1')
-    keyword2 = request.GET.get('keyword2')
+    username = request.GET.get('name')
+    attendtype = request.GET.get('type')
     hiduke= request.GET.get('hiduke')
 
+    #名前で検索
+    if username:
+         List = List.filter(
+                name__icontains=username
+       )
+
+
+    #出退勤で検索
+    if attendtype:
+         List = List.filter(
+                in_out__icontains=attendtype
+       )
+
+
+    #日付で検索
     if hiduke=='一週間前':
-        one_week_ago = dt.datetime.now() + dt.timedelta(days=7)
+        one_week_ago = dt.datetime.now() - dt.timedelta(days=7)
         List = List.filter(date__range=[one_week_ago, dt.datetime.now()])
 
     if hiduke=='当日':
-        today = dt.datetime.now()
+        today=dt.datetime.now().strftime('%m-%d')
         List = List.filter(date__icontains=today)
-
-    #if keyword2 and keyword2:
-    #   List = List.filter(
-    #            name__icontains=keyword1,in_out__icontains=keyword2
-    #   )
+      
     
     params={'List':List}
     return render(request,'list.html', params)
