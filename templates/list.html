@@ -6,20 +6,58 @@
 <body>
     {% block content %}
     <h1>出退勤リスト</h1>
-    <form method="GET" action="{% url 'list' %}">
-        <label>名前</label>
-        <input type="text" name="name">
-        <label>出勤/退勤</label>
-        <input type="text" name="type">
-        
-        <input type="checkbox"  name='hiduke' value="当日">
-        <label >当日</label>
-        <input type="checkbox"  name='hiduke' value="一週間前">
-        <label >一週間前</label>
 
+    <form method="GET" action="{% url 'list' %}">
+
+        名前：<br>
+        <div>
+            <input type="radio" name='name' value="馬場">
+            <label>馬場</label>
+    
+            
+            <input type="radio" name='name' value="工藤">
+            <label>工藤</label>
+    
+            
+            <input type="radio" name='name' value="石川">
+            <label>石川</label>
+    
+            
+            <input type="radio" name='name' value="森田">
+            <label>森田</label>
+           </div>
+
+           <br>
+
+        出勤/退勤：<br>
+        <div>
+            <input type="radio"  name='type' value="出勤">
+            <label >出勤</label>
+
+            <input type="radio"  name='type' value="退勤">
+            <label >退勤</label>
+        </div>
+
+        <br>
+
+
+        期間：<br>
+        <div>
+        <input type="radio"  name='hiduke' value="当日">
+        <label >当日</label>
+        <input type="radio"  name='hiduke' value="一週間前">
+        <label >一週間前</label>
+        </div>
+
+        <br>
+        
         <button type="submit">検索</button>
+        <input type="reset" value="ﾘｾｯﾄする">
 
       </form>
+      <br>
+
+
     <table>
         <thead>
             <tr>

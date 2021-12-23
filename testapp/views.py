@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Attend
-from .forms import UsersForm,AttendForm
+from .forms import AttendForm
 import datetime as dt
 from django.db.models import Q
 
@@ -39,7 +39,7 @@ def create(request):
         if form.is_valid():
             form.save()
     else:
-        params['form'] = UsersForm()
+        params['form'] = AttendForm()
 
     return render(request, 'create.html', params)
 

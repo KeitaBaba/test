@@ -32,12 +32,38 @@
 
     <form action="{% url 'create' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="checkbox" name='in_out' value="出勤">
-        <label for="1">出勤</label>
-        <input type="checkbox" name='in_out' value="退勤">
-        <label for="2">退勤</label>
-        <button type="submit">送信</button>
+
+       名前：<br>
+       <div>
+        <input type="radio" name='name' value="馬場">
+        <label>馬場</label>
+
+        
+        <input type="radio" name='name' value="工藤">
+        <label>工藤</label>
+
+        
+        <input type="radio" name='name' value="石川">
+        <label>石川</label>
+
+        
+        <input type="radio" name='name' value="森田">
+        <label>森田</label>
+       </div>
+
+       <br>
+
+       出勤/退勤：<br>
+       <div>
+        <input type="radio" name='in_out' value="出勤">
+        <label>出勤</label>
+        <input type="radio" name='in_out' value="退勤">
+        <label>退勤</label>
+       </div>
+
+       <br>
+        <button type="submit">打刻</button>
+        <input type="reset" value="ﾘｾｯﾄする">
     </form>
 
 
