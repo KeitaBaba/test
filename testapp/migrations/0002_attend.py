@@ -14,10 +14,11 @@ class Migration(migrations.Migration):
             name='Attend',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=50, null=True)),
+                ('name', models.CharField(blank=False, max_length=50, null=False)),
                 ('in_out', models.CharField(blank=True, max_length=2, null=True)),
                 ('date', models.DateField(blank=True, null=True)),
                 ('time', models.TimeField(blank=True, null=True)),
+                ('leavetime', models.TimeField(blank=True, null=True)),
             ],
             options={
                 'db_table': 'attend',

@@ -29,15 +29,7 @@
 
            <br>
 
-        出勤/退勤：<br>
-        <div>
-            <input type="radio"  name='type' value="出勤">
-            <label >出勤</label>
-
-            <input type="radio"  name='type' value="退勤">
-            <label >退勤</label>
-        </div>
-
+        
         <br>
 
 
@@ -45,8 +37,8 @@
         <div>
         <input type="radio"  name='hiduke' value="当日">
         <label >当日</label>
-        <input type="radio"  name='hiduke' value="一週間前">
-        <label >一週間前</label>
+        <input type="radio"  name='hiduke' value="一週間">
+        <label >一週間</label>
         </div>
 
         <br>
@@ -62,17 +54,17 @@
         <thead>
             <tr>
                 <th scope="col">名前</th>
-                <th scope="col">出勤/退勤</th>
                 <th scope="col">日付</th>
-                <th scope="col">時刻</th>
+                <th scope="col">出勤時刻</th>
+                <th scope="col">退勤時刻</th>
             </tr>
         </thead>
         <tbody>
            {% for list in List %}
               <td>{{ list.name }}</td>
-              <td>{{ list.in_out }}</td>
               <td>{{ list.date|date:"m-d"}}</td>  
-              <td>{{ list.time|date:"H:i" }}</td>                       
+              <td>{{ list.time|date:"H:i" }}</td>  
+              <td>{{ list.leavetime|date:"H:i"}}</td>                      
             </tr>
            {% endfor %}
       
