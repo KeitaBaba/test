@@ -64,7 +64,10 @@
               <td>{{ list.name }}</td>
               <td>{{ list.date|date:"m-d"}}</td>  
               <td>{{ list.time|date:"H:i" }}</td>  
-              <td>{{ list.leavetime|date:"H:i"}}</td>                      
+              <td>{{ list.leavetime|date:"H:i"}}</td> 
+
+              
+              <td><a href="{% url 'delete' list.id %}">削除</a></td>
             </tr>
            {% endfor %}
       

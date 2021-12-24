@@ -1,5 +1,5 @@
 from typing import List
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Attend
 from .forms import AttendForm
 import datetime as dt
@@ -20,19 +20,16 @@ def new(request):
 
 def create(request):
 
-    params = {'name': '','in_out': '','time': '','form': None}
     if request.method == 'POST':
         form = AttendForm(request.POST)
-        params['name'] = request.POST['name']
-        params['in_out'] = request.POST['in_out']
-        name=params['name']
+        name=request.POST['name']
+        in_out=request.POST['in_out']
         obj=form.save(commit=False)
         obj.date=dt.datetime.now().date()
-        obj.time=params['time']=dt.datetime.now().time()
-        params['form'] = form
+        obj.time=time=dt.datetime.now().time()
+        
 
-        if request.POST['in_out']=='出勤':
-            obj.time=params['time']=dt.datetime.now().time()
+        if in_out=='出勤':
             rowcount=Attend.objects.all().filter(name=name,date=dt.datetime.now().date()).count()
             if rowcount==0:
                 if form.is_valid():
@@ -42,17 +39,22 @@ def create(request):
                 return render(request, 'error.html')
 
 
-        elif request.POST['in_out']=='退勤':
+        elif in_out=='退勤':
             attend=Attend.objects.get(name=name,date=dt.datetime.now().date())
             attend.leavetime=dt.datetime.now().time()
             attend.save()
 
+    params = {
+        'name' : name,
+        'time' : time,
+        'in_out' : in_out,
+    }
+    return render(request, 'create.html',params)
 
-    return render(request, 'create.html', params)
 
 
 def list(request):
-    
+
     List=Attend.objects.all()
 
     username = request.GET.get('name')
@@ -77,3 +79,11 @@ def list(request):
     
     params={'List':List}
     return render(request,'list.html', params)
+
+
+def delete(request,pk):
+    attend  = Attend.objects.filter(id=pk)
+    attend.delete()
+
+
+    return render(request,'delete.html')
