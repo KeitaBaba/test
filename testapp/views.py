@@ -80,10 +80,25 @@ def list(request):
     params={'List':List}
     return render(request,'list.html', params)
 
-
 def delete(request,pk):
     attend  = Attend.objects.filter(id=pk)
     attend.delete()
 
 
-    return render(request,'delete.html')
+    return redirect('list')
+
+def update(request,pk):
+
+    attend  = Attend.objects.get(id=pk)
+    if request.method == "POST":
+        attend.name = request.POST["name"]
+        attend.time = request.POST["in"]
+        attend.leavetime = request.POST['out']
+        attend.save()
+        return redirect(list)
+
+    else:
+        params={'attend' : attend}
+        return render(request, 'update.html',params)
+
+

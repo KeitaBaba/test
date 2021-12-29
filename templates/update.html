@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}List{% endblock %}
+
+<html> 
+<body>
+    {% block content %}
+    <h1>編集画面</h1>
+
+    <form action="{% url 'update' attend.id  %}" method="POST">
+        {% csrf_token %}
+
+        <p><label>名前</label></p>
+        <p><input type="text" name="name" value="{{ attend.name }}"></p>
+
+        <p><label>出勤時刻</label></p>
+        <p><input type="text" name="in" value="{{ attend.time }}"></p>
+
+        <p><label>退勤時刻</label></p>
+        <p><input type="text" name="out" value="{{ attend.leavetime }}"></p>
+        <p><button type="submit">更新</button></p>
+    </form>
+
+
+   
+
+
+    {% endblock %}
+
+</body>
+
+</html>
