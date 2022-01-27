@@ -6,12 +6,7 @@ import datetime as dt
 from django.db.models import Q
 
 
-#名前を選択式
-#チェックボックス一つのみ選択
-#日付や名前でフィルター
-#ファイルで出力(csvかExcel)
-#出勤時刻と退勤時刻を横並びで
-#編集機能
+
 
 def new(request):
     

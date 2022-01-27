@@ -1,1 +1,6 @@
-{{name}}さん、{{time|date:"H:i"}}で{{in_out}}しました!
+{% extends 'base.html' %}
+{% block content %}
+
+<p>{{name}}さん、{{time|date:"H:i"}}で{{in_out}}しました!</p>
+
+{% endblock %}

@@ -14,10 +14,10 @@
         <p><input type="text" name="name" value="{{ attend.name }}"></p>
 
         <p><label>出勤時刻</label></p>
-        <p><input type="text" name="in" value="{{ attend.time }}"></p>
+        <p><input type="text" name="in" value="{{ attend.time|date:'H:i'}}"></p>
 
         <p><label>退勤時刻</label></p>
-        <p><input type="text" name="out" value="{{ attend.leavetime }}"></p>
+        <p><input type="text" name="out" value="{{ attend.leavetime|date:'H:i' }}"></p>
         <p><button type="submit">更新</button></p>
     </form>
 
