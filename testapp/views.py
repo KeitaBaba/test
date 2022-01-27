@@ -5,7 +5,8 @@ from .forms import AttendForm
 import datetime as dt
 from django.db.models import Q
 
-
+#退勤重複不可
+#削除確認
 
 
 def new(request):
@@ -35,9 +36,20 @@ def create(request):
 
 
         elif in_out=='退勤':
-            attend=Attend.objects.get(name=name,date=dt.datetime.now().date())
-            attend.leavetime=dt.datetime.now().time()
-            attend.save()
+            #attend=Attend.objects.get(name=name,date=dt.datetime.now().date())
+            #attend.leavetime=dt.datetime.now().time()
+            #attend.save()
+
+            try:
+                attend=Attend.objects.get(name=name,date=dt.datetime.now().date())
+                attend.leavetime=dt.datetime.now().time()
+                attend.save()
+            except:
+                return render(request, 'error2.html')
+
+
+
+        
 
     params = {
         'name' : name,
@@ -88,7 +100,12 @@ def update(request,pk):
     if request.method == "POST":
         attend.name = request.POST["name"]
         attend.time = request.POST["in"]
-        attend.leavetime = request.POST['out']
+        if request.POST['out']=="":
+            attend.leavetime==""
+
+        else:
+            attend.leavetime = request.POST['out']
+        
         attend.save()
         return redirect(list)
 
